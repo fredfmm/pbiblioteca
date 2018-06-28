@@ -4,8 +4,7 @@ app.controller('usuarioController', function ($scope, BASEURL, $http, $filter, t
 
     $scope.carregaUsuarios = function(){
         var strUrl = BASEURL + 'users';
-        $http.get(strUrl).success(function(response){
-            console.log(response)
+        $http.put(strUrl).success(function(response){
             if (response.length >= 1) {
                 $scope.dadosUsuarios = response
                 angular.forEach($scope.dadosUsuarios, function(key, value){
@@ -44,10 +43,10 @@ app.controller('usuarioController', function ($scope, BASEURL, $http, $filter, t
         if (($scope.opcaoBusca === undefined) || ($scope.opcaoBusca === '')){
             $scope.carregaUsuarios();
         }else if(($scope.opcaoBusca !== undefined || $scope.opcaoBusca !== '') && ($scope.gridOptions1.data === '' || $scope.gridOptions1.data === undefined)){
-            var strUrl = BASEURL + 'usuario/retornarTodosUsuarios';
-            $http.post(strUrl).success(function(response){
-                if (response.code == 1) {
-                    $scope.dadosUsuarios = angular.copy(response.usuarios);
+            var strUrl = BASEURL + 'users';
+            $http.put(strUrl).success(function(response){
+                if (response.length >= 1) {
+                    $scope.dadosUsuarios = response
                     angular.forEach($scope.dadosUsuarios, function(key, value){
                         key.nivel_usuario = key.nivel_usuario;
                         key.nivelExibicao = $scope.retornarDescricaoNivel(key.nivel_usuario);
@@ -91,15 +90,13 @@ app.controller('usuarioController', function ($scope, BASEURL, $http, $filter, t
         }else{
             var strUrl = BASEURL + 'users/register';
             var data = $scope.cadastro;
-            console.log(data);
             $http.post(strUrl, data).success(function(response){
-                console.log(response);
               if (response.affectedRows == 1) {
                   toastr.success('Usuário cadastrado com sucesso!');
                   $scope.carregaUsuarios();
                   $('#modalInserirEditar').modal('toggle');
               } else{
-                toastr.error(response.message);
+                toastr.error('Não foi possivel cadastrar o usuário!');
               }
             }).error(function(error){
               toastr.error('Erro ao cadastrar o usuário!');
@@ -108,7 +105,6 @@ app.controller('usuarioController', function ($scope, BASEURL, $http, $filter, t
     };
 
     $scope.modalAlterarUsuario = function(intLinha){
-        console.log(intLinha);
         $scope.cadastro =  {
             'intUsuario': intLinha.id_usuario,
             'blnAtivo': intLinha.ativo_usuario,
@@ -152,15 +148,13 @@ app.controller('usuarioController', function ($scope, BASEURL, $http, $filter, t
         }else{
             var strUrl = BASEURL + 'users/update';
             var data = $scope.cadastro;
-                console.log(data)
             $http.post(strUrl, data).success(function(response){
-                console.log(response)
                 if (response.affectedRows == 1) {
                     toastr.success('Usuário alterado com sucesso!');
                     $scope.carregaUsuarios();
                     $('#modalInserirEditar').modal('toggle');
                 } else {
-                    toastr.error(response.message);
+                    toastr.error('Não foi possível alterar o usuário!');
                 }
             }).error(function(error){
                 toastr.error('Não foi possível alterar o usuário!');

@@ -56,13 +56,13 @@ ng-cloak=""
         </ul>
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
+                <ul class="nav" id="side-menu" ng-controller="HeaderController">
                   <li>
                       <a href="#/" ng-class="{ active: isActive('/')}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                   </li>
 
                   <li>
-                      <a href="#avaliacoes" ng-class="{ active: isActive('/avaliacoes')}"><i class="fa fa-table fa-fw"></i> Estatística geral</a>
+                      <a href="#relatoriosGeral" ng-class="{ active: isActive('/relatoriosGeral')}"><i class="fa fa-table fa-fw"></i> Estatística geral</a>
                   </li>
                   <li>
                       <a href="#relatoriosUsuarios" ng-class="{ active: isActive('/relatoriosUsuarios')}"><i class="fa fa-table fa-fw"></i> Estatísticas de usuários</a>

@@ -1,4 +1,4 @@
-app.controller('avaliacoesController', function ($scope, $rootScope, BASEURL, $window, $http, $timeout, $filter, toastr) {
+app.controller('relatoriosGeralController', function ($scope, $rootScope, BASEURL, $window, $http, $timeout, $filter, toastr) {
 
     $scope.carregaAvaliacoes = function(){
         var strUrl = BASEURL + 'Reviews';
@@ -26,14 +26,13 @@ app.controller('avaliacoesController', function ($scope, $rootScope, BASEURL, $w
             { field: 'nome_livro', displayName: 'Livro' },
             { field: 'nome_usuario', displayName: 'Usuário'},
             { field: 'nota_opiniao', displayName: 'Nota', width:100 },
-            { field: 'estado_opiniao', displayName: 'Estado do Livro' },
+            { field: 'estadoExibicao', displayName: 'Estado do Livro' },
             { displayName: 'Opinião', name: ' ', enableColumnMenu: false, cellTemplate:'<a role="button" data-toggle="modal" data-target="#modalInserirEditar" class="table-icon" data-tipo="Opinião" ng-click="grid.appScope.modalInserirEditar(row.entity);"><i class="fa fa-search-plus" aria-hidden="true"></i></a>'}
         ]
     };
 
     $scope.modalInserirEditar = function(intLinha){
         $scope.opiniao = intLinha;
-        console.log($scope.opiniao);
     };
 
     $scope.pesquisarAvaliacoes = function() {

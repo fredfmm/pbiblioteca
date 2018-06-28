@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Estatística geral</h1>
+        <h1 class="page-header">Estatísticas de usuários</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -9,49 +9,35 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Lista de todas Opiniões
+                Lista de todos usuários
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <form id="formBuscaGeral" name="formBuscaGeral" class="col-lg-12 col-md-12 col-xs-12 form-center">
+                <form id="formBusca" name="formBusca" class="col-lg-12 col-md-12 col-xs-12 form-center">
                     <div class="form-label col-md-4 col-xs-12 no-padding-right">
                         <label class="nicelabel" for="lstBuscaFiltro">
                             Pesquisar por
                         </label>
                         <select class="form-control" id="lstBuscaFiltro" name="lstBuscaFiltro" required aria-label="filtro" ng-focus="opcaoBusca = ''">
-                            <option value="nome_livro">Nome do Livro</option>
                             <option value="nome_usuario">Nome do usuário</option>
-                            <option value="nota_livro">Nota</option>
-                            <option value="estado_livro">Estado do livro</option>
+                            <option value="id_usuario">Código do usuário</option>
                         </select>
                     </div>
-                    <div id="filtro-nome_livro" class="filtro open form-label col-xs-12 col-md-8">
-                        <label class="nicelabel" for="txtBuscaNome">
-                            Nome do livro
-                        </label>
-                        <input ng-model="opcaoBusca.nome_livro" ng-focus="opcaoBusca = ''" type="text" class="form-control" id="txtBuscaNome" aria-label="Nome" placeholder="Digite o nome do livro" />
-                    </div>
-                    <div id="filtro-nome_usuario" class="filtro open form-label col-xs-12 col-md-8" style="display: none;">
+                    <div id="filtro-nome_usuario" class="filtro open form-label col-xs-12 col-md-8">
                         <label class="nicelabel" for="txtBuscaNome">
                             Nome do usuário
                         </label>
-                        <input ng-model="opcaoBusca.nome_usuario" ng-focus="opcaoBusca = ''" type="text" class="form-control" id="txtBuscaNome1" aria-label="Nome" placeholder="Digite o nome do usuário" />
+                        <input ng-model="opcaoBusca.nome_usuario" ng-focus="opcaoBusca = ''" type="text" class="form-control" id="txtBuscaNome" aria-label="Nome" placeholder="Digite o nome do usuário" />
                     </div>
-                    <div id="filtro-nota_livro" class="filtro open form-label col-xs-12 col-md-8" style="display: none;" >
+                    <div id="filtro-id_usuario" class="filtro open form-label col-xs-12 col-md-8" style="display: none;" >
                         <label class="nicelabel" for="txtBuscaNome">
-                            Nota do livro
+                            Código do usuário
                         </label>
-                        <input ng-model="opcaoBusca.nota_livro" ng-focus="opcaoBusca = ''" type="number" class="form-control" id="txtBuscaNome2" aria-label="Nome" placeholder="Digite a nota do livro" />
-                    </div>
-                    <div id="filtro-estado_livro" class="filtro open form-label col-xs-12 col-md-8" style="display: none;" >
-                        <label class="nicelabel" for="txtBuscaNome">
-                            Estado do livro
-                        </label>
-                        <input ng-model="opcaoBusca.estado_livro" ng-focus="opcaoBusca = ''" type="number" class="form-control" id="txtBuscaNome3" aria-label="Nome" placeholder="Digite o estado do livro" />
+                        <input ng-model="opcaoBusca.id_usuario" ng-focus="opcaoBusca = ''" type="number" class="form-control" id="txtBuscaNome2" aria-label="Nome" mask="999999" placeholder="Digite o código do usuário" />
                     </div>
                     <div class="both"></div>
-                    <div class="form-label col-md-12 col-sm-12 col-xs-12 text-center">
-                        <button class="btn btn-primary btn-form-search" type="submit" ng-click="pesquisarAvaliacoes();">
+                    <div class="form-label col-md-12 col-sm-12 col-xs-12 text-center" id="formPesquisa">
+                        <button class="btn btn-primary btn-form-search" type="submit" ng-click="pesquisarUsuarios();">
                             Pesquisar
                         </button>
                     </div>
@@ -91,7 +77,7 @@
                 name="formInserirEditar"
                 id="formInserirEditar"
             >
-                <div class="modal-body">
+                <div class="modal-body" ng-repeat="livros in dadosLivros">
                     <div
                         class="form-label col-md-12 col-sm-12 col-xs-12"
                     >
@@ -99,7 +85,7 @@
                             class="nicelabel"
                             for="txtNome"
                         >
-                        {{opiniao.observacao_opiniao}}
+                            Livro: {{livros.nome_livro}}
                         </label>
                     </div>
                 </div>

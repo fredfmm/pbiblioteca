@@ -1,0 +1,117 @@
+<div class="container">
+    <div class="row" ng-if="exibeTela === '1'">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Informe o seu usuário:</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="loginForm" name="loginForm" ng-submit="verificarRegistro()" novalidate>
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Login" name="login" type="text" autofocus ng-model="usuario.strUser" aria-label="Login" required>
+                            </div>
+                            <input  class="btn btn-lg btn-success btn-block" type="submit" value="Entrar " ng-disabled="!loginForm.$valid" />
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="exibeTela === '2'">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Escolha um livro para avaliar:</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="loginForm3" name="loginForm3" ng-submit="enviarDados()">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="nicelabel">
+                                      Qual o nome do livro: {{livro.intNome.nome_livro}}
+                                 </label>
+                                 <br/>
+                                 <div class="dropdown">
+                                   <button class="form-control" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     Escolha um livro
+                                   </button>
+                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 100%;">
+                                     <li><a ng-click="opcaoLivro(livros);" ng-repeat="livros in dadosLivros">{{livros.nome_livro}}</a></li>
+                                   </div>
+                                 </div>
+
+                                  <!-- <select class="form-control" id="intNome" name="intNome" required aria-label="filtro" ng-model="livro.intNome" ng-options="livros.nome_livro for livros in dadosLivros">
+                                      <option value="">Escolha um livro</option>
+                                  </select> -->
+                            </div>
+                            <div class="form-group">
+                                  <label class="nicelabel">
+                                      Qual o estado de conservação? {{livro.intEstado.nome_estado}}
+                                  </label>
+                                  <div class="dropdown">
+                                    <button class="form-control" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Escolha um estado de conservação
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 100%;">
+                                      <li><a ng-click="opcaoEstado(estado);" ng-repeat="estado in strEstado">{{estado.nome_estado}}</a></li>
+                                    </div>
+                                  </div>
+                                  <!-- <select class="form-control" id="intEstado" name="intEstado" required aria-label="filtro" ng-model="livro.intEstado" ng-options="livros.estado for livros in strEstado">
+                                      <option value="">Escolha uma opção</option>
+                                  </select> -->
+                            </div>
+                            <div class="form-group">
+                                <label class="nicelabel">
+                                    Escolha uma nota?
+                                </label>
+                                <select class="form-control" id="intNota" name="intNota" required aria-label="filtro" ng-model="livro.intNota" ng-options="livros for livros in intNota">
+                                    <option value="">Escolha uma nota</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="nicelabel">
+                                    Observaçoes
+                                </label>
+                                <textarea class="form-control" maxlength="256" ng-model="livro.strObs" name="strObs" autofocus aria-label="Observações" required>
+                                </textarea>
+                            </div>
+
+                            <input  class="btn btn-lg btn-success btn-block" type="submit" value="Cadastrar" ng-disabled="!loginForm3.$valid"/>
+                        </fieldset>
+                    </form>
+                    <br/>
+                    <input  class="btn btn-lg  btn-block" type="submit" value="Cancelar" ng-click="opcaoMenu('1')"/>
+                </div>
+                    <!-- <button type="button" class="btn btn-primary" ng-click="teste();">Testar</button> -->
+                    <!-- <button type="button" class="btn btn-primary" ng-click="opcaoMenu('1')">Cancelar</button> -->
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="exibeTela === '3'">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Obrigado por colaborar!</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="nicelabel">
+                            Cadastrar nova avaliação
+                        </label>
+                        <input  class="btn btn-lg btn-success btn-block" type="submit" value="Cadastrar" ng-click="opcaoMenu('2')"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="nicelabel">
+                            Início
+                        </label>
+                        <input  class="btn btn-lg btn-block" type="submit" value="Início" ng-click="opcaoMenu('1')"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -414,13 +414,13 @@ hr {
     cursor: pointer;
 }
 
-.dropdown {
+.dropdownr {
     position: relative;
     width: 100%;
     display: inline-block;
 }
 
-.dropdown-content {
+.dropdownr-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -429,19 +429,24 @@ hr {
     z-index: 1;
 }
 
-.dropdown-content a {
+.dropdownr-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdownr-content a:hover {background-color: #f1f1f1}
 
-.dropdown:hover .dropdown-content {
+.dropdownr:hover .dropdownr-content {
     display: block;
 }
 
-.dropdown:hover .dropbtn {
+.dropdownr:hover .dropbtn {
     background-color: #3e8e41;
+}
+
+#formPesquisa {
+  padding-top: 1em;
+  padding-bottom: 1em;
 }

@@ -5,6 +5,10 @@ app.run(function($rootScope, $location, AuthService, toastr, $window) {
         toastr.clear();
 
         if ($location.path() !== '/registro') {
+            if (!AuthService.isAuthed()) {
+                $rootScope.exibeMenuprojetoBiblioteca = false;
+                $location.path('/admin');
+            }
             if ($window.localStorage.getItem('projetoBiblioteca') !== null){
                 $rootScope.exibeMenuprojetoBiblioteca = true;
                 $rootScope.strNomeUsuarioprojetoBiblioteca = JSON.parse($window.localStorage.getItem('projetoBiblioteca')).strNome;
@@ -16,10 +20,6 @@ app.run(function($rootScope, $location, AuthService, toastr, $window) {
         }else{
             $rootScope.exibeMenuprojetoBiblioteca = false;
         }
-
-        // if (!AuthService.isAuthed()) {
-        //     $location.path('/admin');
-        // }
     });
 });
 
@@ -47,9 +47,9 @@ app.config(function($routeProvider) {
             controller: 'livrosController'
         })
 
-        .when('/avaliacoes', {
-            templateUrl: 'pages/avaliacoes.html',
-            controller: 'avaliacoesController'
+        .when('/relatoriosGeral', {
+            templateUrl: 'pages/relatoriosGeral.html',
+            controller: 'relatoriosGeralController'
         })
 
         .when('/relatoriosUsuarios', {
@@ -88,7 +88,7 @@ app.factory('AuthInterceptor', function(BASEURL, AuthService, $q) {
         request: function(config) {
             var token = AuthService.getToken();
             if (config.url.indexOf(BASEURL) === 0 && token) {
-                config.headers.Authorization = 'Bearer ' + token;
+                 config.headers['x-access-token'] = token;
             }
             return config;
         },
