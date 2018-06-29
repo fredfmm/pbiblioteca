@@ -1,0 +1,8 @@
+{
+  "generator-angm": {
+    "appName": "projeto_bilioteca",
+    "angularCookies": true,
+    "angularAnimate": true,
+    "angularSanitize": true
+  }
+}

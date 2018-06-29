@@ -23,7 +23,7 @@ app.run(function($rootScope, $location, AuthService, toastr, $window) {
     });
 });
 
-app.constant('BASEURL', 'http://127.0.0.1:3000/');
+app.constant('BASEURL', 'http://127.0.0.1:3001/');
 
 app.config(function($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
