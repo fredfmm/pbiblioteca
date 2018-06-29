@@ -1,0 +1,29 @@
+{
+  "name": "projeto_bilioteca",
+  "version": "1.0.0",
+  "description": "projeto_bilioteca",
+  "main": "www/index.html",
+  "scripts": {
+    "start": "http-server -a localhost -p 8000 -c-1 ./app/views"
+  },
+  "author": "fred",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "delete-empty": "^0.1.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-copy": "^1.0.0",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-sourcemaps": "^2.4.0",
+    "gulp-uglify": "^2.0.1",
+    "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}

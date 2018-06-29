@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Estatísticas de usuários</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Lista de todos usuários
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <form id="formBusca" name="formBusca" class="col-lg-12 col-md-12 col-xs-12 form-center">
+                    <div class="form-label col-md-4 col-xs-12 no-padding-right">
+                        <label class="nicelabel" for="lstBuscaFiltro">
+                            Pesquisar por
+                        </label>
+                        <select class="form-control" id="lstBuscaFiltro" name="lstBuscaFiltro" required aria-label="filtro" ng-focus="opcaoBusca = ''">
+                            <option value="nome_usuario">Nome do usuário</option>
+                            <option value="id_usuario">Código do usuário</option>
+                        </select>
+                    </div>
+                    <div id="filtro-nome_usuario" class="filtro open form-label col-xs-12 col-md-8">
+                        <label class="nicelabel" for="txtBuscaNome">
+                            Nome do usuário
+                        </label>
+                        <input ng-model="opcaoBusca.nome_usuario" ng-focus="opcaoBusca = ''" type="text" class="form-control" id="txtBuscaNome" aria-label="Nome" placeholder="Digite o nome do usuário" />
+                    </div>
+                    <div id="filtro-id_usuario" class="filtro open form-label col-xs-12 col-md-8" style="display: none;" >
+                        <label class="nicelabel" for="txtBuscaNome">
+                            Código do usuário
+                        </label>
+                        <input ng-model="opcaoBusca.id_usuario" ng-focus="opcaoBusca = ''" type="number" class="form-control" id="txtBuscaNome2" aria-label="Nome" mask="999999" placeholder="Digite o código do usuário" />
+                    </div>
+                    <div class="both"></div>
+                    <div class="form-label col-md-12 col-sm-12 col-xs-12 text-center" id="formPesquisa">
+                        <button class="btn btn-primary btn-form-search" type="submit" ng-click="pesquisarUsuarios();">
+                            Pesquisar
+                        </button>
+                    </div>
+                    <div class="both"></div>
+                </form>
+                <div id="search-result" class="col-lg-12 col-md-12 col-xs-12 form-center table-new-responsive table-result" ng-if="showDiv == true">
+                    <div ui-grid="gridOptions1" ui-grid-pagination ui-grid-auto-resize ui-grid-pinning></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div
+    id="modalInserirEditar"
+    class="modal fade"
+    role="dialog"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="modalTipo"></span>
+                </h4>
+            </div>
+            <form
+                role="form"
+                name="formInserirEditar"
+                id="formInserirEditar"
+            >
+                <div class="modal-body" ng-repeat="livros in dadosLivros">
+                    <div
+                        class="form-label col-md-12 col-sm-12 col-xs-12"
+                    >
+                        <label
+                            class="nicelabel"
+                            for="txtNome"
+                        >
+                            Livro: {{livros.nome_livro}}
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                  <input
+                      id="cancel-create-department"
+                      class="btn btn-default"
+                      type="button"
+                      value="Fechar"
+                      data-dismiss="modal"
+                  />
+              </div>
+          </form>
+        </div>
+    </div>
+</div>

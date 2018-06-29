@@ -1,0 +1,230 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Cadastro de Livros</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Lista de todos livros
+            </div>
+            <div class="panel-body">
+                <form id="formBusca" name="formBusca" class="col-lg-12 col-md-12 col-xs-12 form-center">
+                    <div class="form-label col-md-4 col-xs-12 no-padding-right">
+                        <label class="nicelabel" for="lstBuscaFiltro">
+                            Pesquisar por
+                        </label>
+                        <select class="form-control" id="lstBuscaFiltro" name="lstBuscaFiltro" required aria-label="filtro" ng-focus="opcaoBusca = ''">
+                            <option value="id_livro">Código</option>
+                            <option value="nome_livro">Título</option>
+                            <option value="autor_livro">Autor</option>
+                            <option value="editora_livro">Editora</option>
+                            <option value="ano_livro">Ano</option>
+                            <option value="ativo_livro">Status</option>
+                        </select>
+                    </div>
+                    <div id="filtro-id_livro" class="filtro open form-label col-xs-12 col-md-8">
+                        <label class="nicelabel" for="txtBuscaNome">
+                            Código do Livro
+                        </label>
+                        <input ng-model="opcaoBusca.id_livro" ng-focus="opcaoBusca = ''" type="number" class="form-control" id="txtBuscaNome" aria-label="Nome" placeholder="Digite o código do livro" />
+                    </div>
+                    <div id="filtro-nome_livro" class="filtro open form-label col-xs-12 col-md-8" style="display: none;">
+                        <label class="nicelabel" for="txtBuscaNome">
+                            Nome do Livro
+                        </label>
+                        <input ng-model="opcaoBusca.nome_livro" ng-focus="opcaoBusca = ''" type="text" class="form-control" id="txtBuscaNome1" aria-label="Nome" placeholder="Digite o nome do livro" />
+                    </div>
+                    <div id="filtro-autor_livro" class="filtro open form-label col-xs-12 col-md-8" style="display: none;">
+                        <label class="nicelabel" for="txtBuscaNome">
+                            Autor do Livro
+                        </label>
+                        <input ng-model="opcaoBusca.autor_livro" ng-focus="opcaoBusca = ''" type="text" class="form-control" id="txtBuscaNome2" aria-label="Nome" placeholder="Digite o nome do autor do livro" />
+                    </div>
+                    <div id="filtro-editora_livro" class="filtro open form-label col-xs-12 col-md-8" style="display: none;">
+                        <label class="nicelabel" for="txtBuscaNome">
+                            Editora do Livro
+                        </label>
+                        <input ng-model="opcaoBusca.editora_livro" ng-focus="opcaoBusca = ''" type="text" class="form-control" id="txtBuscaNome3" aria-label="Nome" placeholder="Digite o nome da editora do livro" />
+                    </div>
+                    <div id="filtro-ano_livro" class="filtro open form-label col-xs-12 col-md-8" style="display: none;">
+                        <label class="nicelabel" for="txtBuscaNome">
+                            Ano do Livro
+                        </label>
+                        <input ng-model="opcaoBusca.ano_livro" ng-focus="opcaoBusca = ''" type="number" class="form-control" id="txtBuscaNome4" aria-label="Nome" placeholder="Digite o ano do livro" />
+                    </div>
+                    <div id="filtro-ativo_livro" class="filtro form-label col-xs-12 col-md-8" style="display: none;">
+                        <label class="nicelabel" for="lstBuscaStatus">
+                            Status
+                        </label>
+                        <select id="lstBuscaStatus" class="form-control" name="lstBuscaStatus" aria-label="Status" ng-model="opcaoBusca.ativo_livro" ng-focus="opcaoBusca = ''">
+                            <option value="">Status</option>
+                            <option value="0">Ativo</option>
+                            <option value="1">Inativo</option>
+                        </select>
+                    </div>
+                    <div class="both"></div>
+                    <div class="form-label col-md-12 col-sm-12 col-xs-12 text-center" id="formPesquisa">
+                        <button class="btn btn-default btn-form-search" type="submit" data-toggle="modal" data-target="#modalInserirEditar" data-tipo="Cadastrar" ng-click="opcaoLivroCadastro();">
+                            Cadastrar
+                        </button>
+                        <button class="btn btn-primary btn-form-search" type="submit" ng-click="pesquisarLivros();">
+                            Pesquisar
+                        </button>
+                    </div>
+                    <div class="both"></div>
+                </form>
+                <div id="search-result" class="col-lg-12 col-md-12 col-xs-12 form-center table-new-responsive table-result" ng-if="showDiv == true" >
+                    <div ui-grid="gridOptions1" ui-grid-pagination ui-grid-auto-resize ui-grid-pinning></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div
+    id="modalInserirEditar"
+    class="modal fade"
+    role="dialog"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class="modalTipo"></span> livro
+                </h4>
+            </div>
+            <form
+                role="form"
+                name="formInserirEditar"
+                id="formInserirEditar"
+                ng-submit="opcaoLivro(cadastro.intOpcao);"
+            >
+                <div class="modal-body">
+                    <div
+                        class="form-label col-md-12 col-sm-12 col-xs-12"
+                    >
+                        <label
+                            class="nicelabel"
+                            for="txtNome"
+                        >
+                            Título*
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="txtNome"
+                            id="txtNome"
+                            maxlength="50"
+                            required
+                            aria-label="Nome"
+                            ng-model="cadastro.strTitulo"
+                        />
+                    </div>
+                    <div
+                        class="form-label col-md-12 col-sm-12 col-xs-12"
+                    >
+                        <label
+                            class="nicelabel"
+                            for="txtNome"
+                        >
+                            Autor*
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="txtAutor"
+                            id="txtAutor"
+                            maxlength="50"
+                            required
+                            aria-label="Nome"
+                            ng-model="cadastro.strAutor"
+                        />
+                    </div>
+                    <div
+                        class="form-label col-xs-12 col-md-6"
+                    >
+                        <label
+                            class="nicelabel"
+                            for="txtLogin"
+                        >
+                            Editora*
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="txtEditora"
+                            name="txtEditora"
+                            maxlength="50"
+                            required
+                            aria-label="Login"
+                            ng-model="cadastro.strEditora"
+                        />
+                    </div>
+                    <div
+                        class="form-label col-md-6 col-xs-12"
+                    >
+                        <label
+                            class="nicelabel"
+                            for="lstNivel"
+                        >
+                            Ano*
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="txtAno"
+                            name="txtAno"
+                            maxlength="50"
+                            required
+                            aria-label="Ano"
+                            mask ="9999"
+                            ng-model="cadastro.strAno"
+                        />
+                    </div>
+                    <div
+                        class="form-label col-xs-12 col-md-12"
+                    >
+                        <input
+                            type="checkbox"
+                            name="status"
+                            id="checkStatus"
+                            aria-label="Status"
+                            ng-model="cadastro.blnAtivo"
+                            ng-true-value="1" ng-false-value="0"
+                            ng-checked="cadastro.blnAtivo == 1"
+                        /> Inativo
+                    </div>
+                    <div class="both"></div>
+                </div>
+                <div class="modal-footer text-center">
+                    <input
+                        id="cancel-create-department"
+                        class="btn btn-default"
+                        type="button"
+                        value="Cancelar"
+                        data-dismiss="modal"
+                    />
+                    <input
+                        class="btn btn-primary btn-form-create"
+                        type="submit"
+                        value="Salvar"
+                        ng-disabled="!formInserirEditar.$valid"
+                    />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
