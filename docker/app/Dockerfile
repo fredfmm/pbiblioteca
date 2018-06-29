@@ -1,7 +1,7 @@
 FROM node:8
 
 WORKDIR /src
-COPY nodeApi/ src/
+COPY ../../nodeApi/ src/
 RUN npm install
 
 EXPOSE 3001

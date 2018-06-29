@@ -2,7 +2,7 @@
 Informações importantes do projeto biblioteca.
 
 ## **Informações importantes** ##
-Embora utilizado, não é necessário um servidor Apache para executar este projeto, ao longo deste documento é descrito como executar a aplicação
+Embora utilizado, não é necessário um servidor Apache para executar este projeto, ao longo deste documento é descrito como executar a aplicação.
 
 ## **Ambiente de desenvolvimento** ##
 
@@ -45,7 +45,7 @@ nodeApi/                - Raiz da aplicação.
 ## **Como faço funcionar o Front-end?** ##
 
 É muito simples!
-Para executar este projeto é necessário o NodeJs e NPM.
+Para executar este projeto é necessário o NodeJs, Npm e Gulp.
 
 
 Windows: Utilizando o Mingw-w64 (GCC compiler on Windows system) basta seguir os mesmos passos descritos para o SO Ubuntu.
@@ -125,7 +125,7 @@ $ node bin/www &
 ```
 Pronto a aplicação já está pronta e rodando em http://127.0.0.1:3001/
 
-# **Observação** #
+# **Observaçôes** #
 
 Todas as requisições devem possuir o seguinte header:
 
@@ -139,6 +139,17 @@ Se a URL da API for alterada é necessário realizar a alteração em app/views/
 na seguinte linha:
 ** 26 -- app.constant('BASEURL', 'http://127.0.0.1:3001/');**
 
+# **Docker** #
+  Tambem é possivel executar o back-end e banco de dados através de um container do docker.
+  Disponivel na raiz do projeto, basta executar:
+  ```
+  $ docker-compose build
+
+  ```
+  ```
+  $ docker-compose up
+
+  ```
 
 # **Considerações Finais** #
 

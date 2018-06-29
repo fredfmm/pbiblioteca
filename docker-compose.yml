@@ -1,6 +1,33 @@
-web:
-  build: .
-  volumes:
-    - "./nodeApi:/src/nodeApi"
-  ports:
-    - "3030:3001"
+version: '3.4'
+
+services:
+    web:
+        image: biblioteca-api
+        container_name: biblioteca-api
+        build: .
+        volumes:
+          - "./nodeApi:/src/nodeApi"
+        ports:
+          - "3001:3001"
+        restart: always
+        links:
+           - bd
+        depends_on:
+           - bd
+
+    bd:
+        image: mysql-biblioteca
+        build: ./docker/mysql/
+        container_name: base-biblioteca
+        ports:
+           - 3306:3306
+        volumes:
+           - mysqlbiblioteca:/var/lib/mysql
+        restart: always
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=root
+            - MYSQL_DATABASE=biblioteca
+
+volumes:
+    mysqlbiblioteca:

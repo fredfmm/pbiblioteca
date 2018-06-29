@@ -805,7 +805,7 @@ app.controller('relatoriosLivrosController', function ($scope, $rootScope, BASEU
                 $scope.dadosAvaliacao = response;
                 var relatorio = [];
                 angular.forEach($scope.dadosLivros, function(keyLivro, valueLivro){
-                    relatorioOpiniao = [];
+                    var relatorioOpiniao = [];
                     var nota = 0;
                     var count = [];
 
